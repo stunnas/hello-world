@@ -46,13 +46,12 @@ interface AnimatedVideoProps {
   filter: string;
 }
 const AnimatedVideo = ({ src }: AnimatedVideoProps) => {
-
   const isVideo = src.endsWith(".mp4") || src.endsWith(".webm");
 
   return (
     <section className="flex flex-col items-center justify-center w-full h-screen overflow-hidden">
       <div className="absolute flex flex-col justify-center items-center space-y-4 text-blue-500 font-bold z-10">
-        <div className="loader"/>
+        <div className="loader" />
         <p>Loading...</p>
       </div>
       {isVideo ? (
@@ -60,7 +59,6 @@ const AnimatedVideo = ({ src }: AnimatedVideoProps) => {
           className="max-w-full max-h-full w-auto h-auto min-w-full min-h-full object-cover z-20"
           src={src}
           autoPlay
-          playsInline
           loop
           muted
         />

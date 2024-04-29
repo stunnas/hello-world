@@ -12,7 +12,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export type TypeOptions = "flash" | "snap" | "stripes" | "run" | "pow" | "morisawa";
+export type TypeOptions =
+  | "flash"
+  | "snap"
+  | "stripes"
+  | "run"
+  | "pow"
+  | "morisawa";
+
 interface TypeOptionControllerProps {
   selectedValue: TypeOptions;
   onSelectChange: (value: TypeOptions) => void;
@@ -28,7 +35,7 @@ export function TypeOptionController({
       onValueChange={onSelectChange}
       name="typeController"
     >
-      <SelectTrigger className="max-w-min px-4 bg-blue-500">
+      <SelectTrigger className="max-w-min px-4 bg-blue-500 text-white">
         <SelectValue placeholder="Select a type" />
       </SelectTrigger>
       <SelectContent>

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 
 export type FilterOptions = "none" | "inverted" | "greyscale";
+
 interface FilterOptionControllerProps {
   selectedValue: FilterOptions;
   onSelectChange: (value: FilterOptions) => void;
@@ -28,7 +29,7 @@ export function FilterOptionController({
       onValueChange={onSelectChange}
       name="filterController"
     >
-      <SelectTrigger className="max-w-min px-4 bg-blue-500">
+      <SelectTrigger className="max-w-min px-4 bg-blue-500 text-white">
         <SelectValue placeholder="Select a filter" />
       </SelectTrigger>
       <SelectContent>

@@ -51,10 +51,11 @@ export default function Home() {
             width={200}
             src="/images/caa.png"
             alt="personal logo"
+            priority={true}
           />
         </Link>
       </div>
-      <div className="absolute bottom-4 left-4 flex flex-row space-x-4 z-50">
+      <div className="absolute bottom-4 left-4 hidden md:flex flex-row space-x-4 z-50">
         <div className="flex flex-row items-center space-x-2 ring-1 text-white ring-white bg-blue-500 rounded-xl p-2">
           <h2 className="text-md">Type:</h2>
           <TypeOptionController
@@ -71,7 +72,12 @@ export default function Home() {
         </div>
       </div>
 
-      <Aside />
+      <Aside
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+        selectedFilter={selectedFilter}
+        setSelectedFilter={setSelectedFilter}
+      />
       <AnimatedVideo
         src={videoSrcMap[selectedType]}
         filter={selectedFilter}

@@ -2,8 +2,25 @@
 import { useState } from "react";
 import { ChevronRightIcon, HomeIcon, InfoIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { TypeOptionController, TypeOptions } from "./typeOptionController";
+import {
+  FilterOptionController,
+  FilterOptions,
+} from "./filterOptionController";
 
-const Aside = () => {
+interface AsideProps {
+  selectedType: TypeOptions;
+  setSelectedType: React.Dispatch<React.SetStateAction<TypeOptions>>;
+  selectedFilter: FilterOptions;
+  setSelectedFilter: React.Dispatch<React.SetStateAction<FilterOptions>>;
+}
+
+const Aside: React.FC<AsideProps> = ({
+  selectedType,
+  setSelectedType,
+  selectedFilter,
+  setSelectedFilter,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
 
@@ -15,7 +32,7 @@ const Aside = () => {
 
   return (
     <aside
-      className={`fixed right-0 top-0 w-2/5 lg:w-2/12 h-full z-50 ${
+      className={`fixed right-0 top-0 w-2/5 md:w-1/4 h-full z-50 ${
         isVisible ? "translate-x-0" : "translate-x-full"
       } transition-transform duration-300 ease-in-out`}
     >
@@ -30,8 +47,10 @@ const Aside = () => {
           }`}
         />
       </button>
-      <div className="w-full h-full bg-white border-2 p-4 overflow-auto">
-        <nav className="mb-8 text-lg font-semibold text-left">
+      <div className="w-full h-full bg-white border-2 p-4 space-y-8 overflow-auto">
+        {/* Navigation */}
+        <nav className="text-lg font-semibold text-left">
+          <p className=" font-light">Navigation:</p>
           <ul className="space-y-4">
             <li
               className={`rounded border transition-all duration-200 hover:text-blue-500 hover:scale-110 hover:bg-gray-500/10 ${
@@ -42,8 +61,8 @@ const Aside = () => {
                 href="/"
                 className={`w-full h-full flex flex-row justify-between items-center p-4`}
               >
-                <p className="text-3xl">Home</p>
-                <HomeIcon className="size-8 ml-2" />
+                <p className="text-xl md:text-3xl">Home</p>
+                <HomeIcon className="size-6 md:size-8 ml-2" />
               </a>
             </li>
             <li
@@ -55,12 +74,39 @@ const Aside = () => {
                 href="/about"
                 className={`w-full h-full flex flex-row justify-between items-center p-4`}
               >
-                <p className="text-3xl">About</p>
-                <InfoIcon className="size-8 ml-2" />
+                <p className="text-xl md:text-3xl">About</p>
+                <InfoIcon className="size-6 md:size-8 ml-2" />
               </a>
             </li>
           </ul>
         </nav>
+        <div className="flex flex-col md:hidden w-full space-y-4">
+          <div className="w-full h-1 bg-gray-500/50" />
+          {/* Controllers */}
+          <div className="text-lg font-semibold text-left">
+            <p className="font-light">Controllers:</p>
+            <ul className="space-y-4">
+              <li
+                className={`flex flex-col lg:flex-row items-center justify-center lg:justify-between rounded border p-4`}
+              >
+                <h2 className="text-xl lg:text-3xl">Type:</h2>
+                <TypeOptionController
+                  selectedValue={selectedType}
+                  onSelectChange={setSelectedType}
+                />
+              </li>
+              <li
+                className={`flex flex-col lg:flex-row items-center justify-center lg:justify-between rounded border p-4`}
+              >
+                <h2 className="text-xl lg:text-3xl">Filter:</h2>
+                <FilterOptionController
+                  selectedValue={selectedFilter}
+                  onSelectChange={setSelectedFilter}
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </aside>
   );
