@@ -3,9 +3,8 @@ import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { Surface, Node, Shaders, GLSL } from "gl-react"; // Import necessary gl-react components
+import { Shaders, GLSL } from "gl-react";
 
-// Define your shaders
 const shaders = Shaders.create({
   none: {
     frag: GLSL`
@@ -47,14 +46,13 @@ interface AnimatedVideoProps {
   filter: string;
 }
 const AnimatedVideo = ({ src }: AnimatedVideoProps) => {
-  const [isLoading, setIsLoading] = useState(true);
 
   const isVideo = src.endsWith(".mp4") || src.endsWith(".webm");
 
   return (
     <section className="flex flex-col items-center justify-center w-full h-screen overflow-hidden">
       <div className="absolute flex flex-col justify-center items-center space-y-4 text-blue-500 font-bold z-10">
-        <div className="loader"></div>
+        <div className="loader"/>
         <p>Loading...</p>
       </div>
       {isVideo ? (

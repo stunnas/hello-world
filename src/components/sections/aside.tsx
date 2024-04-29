@@ -1,14 +1,17 @@
 "use client";
 import { useState } from "react";
-
 import { ChevronRightIcon, HomeIcon, InfoIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Aside = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+
+  const isActive = (linkPath: string) => pathname === linkPath;
 
   return (
     <aside
@@ -30,22 +33,30 @@ const Aside = () => {
       <div className="w-full h-full bg-white border-2 p-4 overflow-auto">
         <nav className="mb-8 text-lg font-semibold text-left">
           <ul className="space-y-4">
-            <li>
+            <li
+              className={`rounded border transition-all duration-200 hover:text-blue-500 hover:scale-110 hover:bg-gray-500/10 ${
+                isActive("/") ? "text-blue-500" : ""
+              }`}
+            >
               <a
                 href="/"
-                className="flex flex-row items-center hover:text-blue-500 transition-colors duration-200"
+                className={`w-full h-full flex flex-row justify-between items-center p-4`}
               >
-                <p className="text-xl">Home</p>
-                <HomeIcon className="size-6 ml-2" />
+                <p className="text-3xl">Home</p>
+                <HomeIcon className="size-8 ml-2" />
               </a>
             </li>
-            <li>
+            <li
+              className={`rounded border transition-all duration-200 hover:text-blue-500 hover:scale-110 hover:bg-gray-500/10 ${
+                isActive("/about") ? "text-blue-500" : ""
+              }`}
+            >
               <a
                 href="/about"
-                className="flex flex-row items-center hover:text-blue-500 transition-colors duration-200"
+                className={`w-full h-full flex flex-row justify-between items-center p-4`}
               >
-                <p className="text-xl">About</p>
-                <InfoIcon className="size-6 ml-2" />
+                <p className="text-3xl">About</p>
+                <InfoIcon className="size-8 ml-2" />
               </a>
             </li>
           </ul>
