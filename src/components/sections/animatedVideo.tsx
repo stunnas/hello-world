@@ -1,4 +1,4 @@
-// AnimatedVideo.js
+import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
@@ -81,7 +81,7 @@ const AnimatedVideo = ({ src }: AnimatedVideoProps) => {
           muted
         />
       ) : (
-        <img
+        <Image
           className="max-w-full max-h-full w-auto h-auto min-w-full min-h-full object-cover"
           src={src}
           alt="Animated content"
