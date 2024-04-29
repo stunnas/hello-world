@@ -27,10 +27,10 @@ export default function Home() {
   };
   return (
     <main className="w-full max-h-screen flex flex-col items-center space-y-0 gap-0">
-      <div className="absolute top-4 left-4 flex flex-row items-center justify-center space-x-2 text-blue-500">
+      <div className="absolute top-4 left-4 flex flex-row items-center justify-center space-x-2 text-blue-500 z-50">
         <Link
           href="/"
-          className="size-16 z-50"
+          className="size-16"
         >
           <Image
             height={200}
@@ -44,7 +44,7 @@ export default function Home() {
         <Link
           href="https://caa-v1.vercel.app/"
           target="_blank"
-          className="size-16 z-50"
+          className="size-16"
         >
           <Image
             height={200}
