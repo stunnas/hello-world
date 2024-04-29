@@ -9,10 +9,10 @@ import {
 } from "./filterOptionController";
 
 interface AsideProps {
-  selectedType: TypeOptions;
-  setSelectedType: React.Dispatch<React.SetStateAction<TypeOptions>>;
-  selectedFilter: FilterOptions;
-  setSelectedFilter: React.Dispatch<React.SetStateAction<FilterOptions>>;
+  selectedType?: TypeOptions;
+  setSelectedType?: React.Dispatch<React.SetStateAction<TypeOptions>>;
+  selectedFilter?: FilterOptions;
+  setSelectedFilter?: React.Dispatch<React.SetStateAction<FilterOptions>>;
 }
 
 const Aside: React.FC<AsideProps> = ({

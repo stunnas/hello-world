@@ -21,8 +21,8 @@ export type TypeOptions =
   | "morisawa";
 
 interface TypeOptionControllerProps {
-  selectedValue: TypeOptions;
-  onSelectChange: (value: TypeOptions) => void;
+  selectedValue?: TypeOptions;
+  onSelectChange?: (value: TypeOptions) => void;
 }
 
 export function TypeOptionController({

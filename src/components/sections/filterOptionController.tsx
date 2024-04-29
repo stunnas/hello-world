@@ -15,8 +15,8 @@ import {
 export type FilterOptions = "none" | "inverted" | "greyscale";
 
 interface FilterOptionControllerProps {
-  selectedValue: FilterOptions;
-  onSelectChange: (value: FilterOptions) => void;
+  selectedValue?: FilterOptions;
+  onSelectChange?: (value: FilterOptions) => void;
 }
 
 export function FilterOptionController({
