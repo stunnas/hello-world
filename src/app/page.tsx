@@ -28,7 +28,7 @@ export default function Home() {
 
   const currentVideoSrc = useMemo(
     () => videoSrcMap[selectedType],
-    [selectedType]
+    [selectedType, videoSrcMap]
   );
   return (
     <main className="w-full max-h-screen flex flex-col items-center space-y-0 gap-0">
