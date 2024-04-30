@@ -86,6 +86,7 @@ const AnimatedVideo = ({ src }: AnimatedVideoProps) => {
           className="max-w-full max-h-full w-auto h-auto min-w-full min-h-full object-fill z-20"
           src={src}
           autoPlay
+          playsInline
           loop
           muted
         />
