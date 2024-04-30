@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { Shaders, GLSL } from "gl-react";
 
@@ -46,7 +46,33 @@ interface AnimatedVideoProps {
   filter: string;
 }
 const AnimatedVideo = ({ src }: AnimatedVideoProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const isVideo = src.endsWith(".mp4") || src.endsWith(".webm");
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement && isVideo) {
+      videoElement.play();
+
+      // Adjust video size on window resize
+      const handleResize = () => {
+        if (window.innerWidth < 768) {
+          videoElement.style.maxHeight = `${window.innerHeight}px`;
+          videoElement.style.width = "auto";
+        } else {
+          videoElement.style.maxWidth = "100%";
+          videoElement.style.height = "auto";
+        }
+      };
+      window.addEventListener("resize", handleResize);
+      handleResize();
+
+      return () => {
+        videoElement.pause();
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, [src, isVideo]);
 
   return (
     <section className="flex flex-col items-center justify-center w-full h-screen overflow-hidden">
@@ -56,7 +82,8 @@ const AnimatedVideo = ({ src }: AnimatedVideoProps) => {
       </div>
       {isVideo ? (
         <video
-          className="max-w-full max-h-full w-auto h-auto min-w-full min-h-full object-cover z-20"
+          ref={videoRef}
+          className="max-w-full max-h-full w-auto h-auto min-w-full min-h-full object-fill z-20"
           src={src}
           autoPlay
           loop
@@ -64,7 +91,7 @@ const AnimatedVideo = ({ src }: AnimatedVideoProps) => {
         />
       ) : (
         <Image
-          className="max-w-full max-h-full w-auto h-auto min-w-full min-h-full object-cover z-20"
+          className="max-w-full max-h-full w-auto h-auto min-w-full min-h-full object-fill z-20"
           width={1920}
           height={1080}
           src={src}

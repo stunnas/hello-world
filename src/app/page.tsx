@@ -11,7 +11,7 @@ import {
 } from "@/components/sections/typeOptionController";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 export default function Home() {
   const [selectedType, setSelectedType] = useState<TypeOptions>("flash");
@@ -25,6 +25,11 @@ export default function Home() {
     pow: "/videos/pow.mp4",
     morisawa: "/videos/morisawa.gif",
   };
+
+  const currentVideoSrc = useMemo(
+    () => videoSrcMap[selectedType],
+    [selectedType]
+  );
   return (
     <main className="w-full max-h-screen flex flex-col items-center space-y-0 gap-0">
       <div className="absolute top-4 left-4 flex flex-row items-center justify-center space-x-2 text-blue-500 z-50">
@@ -79,7 +84,7 @@ export default function Home() {
         setSelectedFilter={setSelectedFilter}
       />
       <AnimatedVideo
-        src={videoSrcMap[selectedType]}
+        src={currentVideoSrc}
         filter={selectedFilter}
       />
     </main>

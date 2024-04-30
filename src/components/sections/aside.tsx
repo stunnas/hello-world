@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronRightIcon, HomeIcon, InfoIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { TypeOptionController, TypeOptions } from "./typeOptionController";
@@ -22,6 +22,7 @@ const Aside: React.FC<AsideProps> = ({
   setSelectedFilter,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [windowWidth, setWindowWidth] = useState<number>(1920);
   const pathname = usePathname();
 
   const toggleVisibility = () => {
@@ -29,6 +30,21 @@ const Aside: React.FC<AsideProps> = ({
   };
 
   const isActive = (linkPath: string) => pathname === linkPath;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    handleResize();
+
+    // Add event listener for resize
+    window.addEventListener("resize", handleResize);
+
+    // Clean up function to remove event listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <aside
@@ -40,7 +56,9 @@ const Aside: React.FC<AsideProps> = ({
         className="min-w-max absolute bottom-4 right-full flex flex-row items-center p-4 rounded-tl-full rounded-bl-full text-white bg-blue-500 ring-1 ring-white z-50 "
         onClick={toggleVisibility}
       >
-        <h2 className="text-sm">Navigation</h2>
+        <h2 className="text-sm">
+          Navigation {windowWidth < 792 ? "+ Controllers" : ""}
+        </h2>
         <ChevronRightIcon
           className={`size-4 transition-all duration-500 ease-in-out ${
             isVisible ? "rotate-0" : "rotate-180"
@@ -80,33 +98,35 @@ const Aside: React.FC<AsideProps> = ({
             </li>
           </ul>
         </nav>
-        <div className="flex flex-col md:hidden w-full space-y-4">
-          <div className="w-full h-1 bg-gray-500/50" />
-          {/* Controllers */}
-          <div className="text-lg font-semibold text-left">
-            <p className="font-light">Controllers:</p>
-            <ul className="space-y-4">
-              <li
-                className={`flex flex-col lg:flex-row items-center justify-center lg:justify-between rounded border p-4`}
-              >
-                <h2 className="text-xl lg:text-3xl">Type:</h2>
-                <TypeOptionController
-                  selectedValue={selectedType}
-                  onSelectChange={setSelectedType}
-                />
-              </li>
-              <li
-                className={`flex flex-col lg:flex-row items-center justify-center lg:justify-between rounded border p-4`}
-              >
-                <h2 className="text-xl lg:text-3xl">Filter:</h2>
-                <FilterOptionController
-                  selectedValue={selectedFilter}
-                  onSelectChange={setSelectedFilter}
-                />
-              </li>
-            </ul>
+        {pathname === "/" && (
+          <div className="flex flex-col md:hidden w-full space-y-4">
+            <div className="w-full h-1 bg-gray-500/50" />
+            {/* Controllers */}
+            <div className="text-lg font-semibold text-left">
+              <p className="font-light">Controllers:</p>
+              <ul className="space-y-4">
+                <li
+                  className={`flex flex-col lg:flex-row items-start justify-center lg:justify-between rounded`}
+                >
+                  <h2 className="text-xl lg:text-3xl">Type:</h2>
+                  <TypeOptionController
+                    selectedValue={selectedType}
+                    onSelectChange={setSelectedType}
+                  />
+                </li>
+                <li
+                  className={`flex flex-col lg:flex-row items-start justify-center lg:justify-between rounded`}
+                >
+                  <h2 className="text-xl lg:text-3xl">Filter:</h2>
+                  <FilterOptionController
+                    selectedValue={selectedFilter}
+                    onSelectChange={setSelectedFilter}
+                  />
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </aside>
   );
