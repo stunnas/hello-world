@@ -107,8 +107,9 @@ export default function About() {
           About This Project
         </h2>
         <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 mt-4">
-          I created this "Hello World" website just for fun to test state
-          management with React and work with videos and images interchangeably.
+          I created this &quot;Hello World&quot; website just for fun to test
+          state management with React and work with videos and images
+          interchangeably.
         </p>
         <div className="mt-8 space-y-4">
           <CollapsibleComponent title="Project Goals">
