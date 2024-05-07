@@ -53,11 +53,15 @@ const Aside: React.FC<AsideProps> = ({
       } transition-transform duration-300 ease-in-out`}
     >
       <button
-        className="min-w-max absolute bottom-4 right-full flex flex-row items-center p-4 rounded-tl-full rounded-bl-full text-white bg-blue-500 ring-1 ring-white z-50 "
+        className={`min-w-max absolute bottom-4 right-full flex flex-row items-center p-4 rounded-tl-full rounded-bl-full  ${
+          isActive("/")
+            ? "bg-blue-500 text-white ring-white"
+            : "bg-blue-500/10 text-black ring-black"
+        } ring-1  z-50 `}
         onClick={toggleVisibility}
       >
-        <h2 className="text-sm">
-          Navigation {windowWidth < 792 ? "+ Controllers" : ""}
+        <h2 className={`text-sm`}>
+          Navigation {windowWidth < 768 && isActive("/") ? "+ Controllers" : ""}
         </h2>
         <ChevronRightIcon
           className={`size-4 transition-all duration-500 ease-in-out ${
@@ -114,7 +118,7 @@ const Aside: React.FC<AsideProps> = ({
                     onSelectChange={setSelectedType}
                   />
                 </li>
-                <li
+                {/* <li
                   className={`flex flex-col lg:flex-row items-start justify-center lg:justify-between rounded`}
                 >
                   <h2 className="text-xl lg:text-3xl">Filter:</h2>
@@ -122,7 +126,7 @@ const Aside: React.FC<AsideProps> = ({
                     selectedValue={selectedFilter}
                     onSelectChange={setSelectedFilter}
                   />
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

@@ -68,13 +68,13 @@ export default function Home() {
             onSelectChange={setSelectedType}
           />
         </div>
-        <div className="flex flex-row items-center space-x-2 ring-1 text-white ring-white bg-blue-500 rounded-xl p-2">
+        {/* <div className="flex flex-row items-center space-x-2 ring-1 text-white ring-white bg-blue-500 rounded-xl p-2">
           <h2 className="text-md">Filter:</h2>
           <FilterOptionController
             selectedValue={selectedFilter}
             onSelectChange={setSelectedFilter}
           />
-        </div>
+        </div> */}
       </div>
 
       <Aside
@@ -85,7 +85,7 @@ export default function Home() {
       />
       <AnimatedVideo
         src={currentVideoSrc}
-        filter={selectedFilter}
+        // filter={selectedFilter}
       />
     </main>
   );
